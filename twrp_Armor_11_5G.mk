@@ -14,12 +14,13 @@
 # limitations under the License.
 #
 
-# Release name
+# Dynamic
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
 # Inherit from those products. Most specific first.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
 
 # Inherit from Armor_11_5G device
 $(call inherit-product, device/ulefone/Armor_11_5G/device.mk)
@@ -41,6 +42,6 @@ PRODUCT_BOARD := k6873v1_64
 PRODUCT_BUILD_PROP_OVERRIDES += \
     TARGET_DEVICE=Armor_11_5G \
     PRODUCT_NAME=Armor_11_5G \
-    PRIVATE_BUILD_DESC="full_k6873v1_64-user 11 RP1A.200720.011 mp1V8132 release-keys"
+    PRIVATE_BUILD_DESC="full_k6873v1_64-user 11 RP1A.200720.011 p1k61v164bspP21 release-keys"
 
-BUILD_FINGERPRINT := Ulefone/Armor_11_5G/Armor_11_5G:11/RP1A.200720.011/1626674585:user/release-keys
+BUILD_FINGERPRINT := Ulefone/Armor_11_5G/Armor_11_5G:11/RP1A.200720.011/1646618057:user/release-keys

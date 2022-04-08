@@ -117,17 +117,19 @@ BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
 TARGET_COPY_OUT_VENDOR := vendor
 
 # System as root
-#BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
+BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
 BOARD_SUPPRESS_SECURE_ERASE := true
 
 # Recovery
 #TARGET_RECOVERY_PIXEL_FORMAT := "BGRA_8888"
-TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/system/etc/twrp.fstab
+#TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/system/etc/twrp.fstab
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_HAS_LARGE_FILESYSTEM := true
+TARGET_RECOVERY_DEVICE_MODULES += libkeymaster4
 TARGET_RECOVERY_DEVICE_MODULES += libpuresoftkeymasterdevice
 TARGET_RECOVERY_DEVICE_MODULES += ashmemd_aidl_interface-cpp
 TARGET_RECOVERY_DEVICE_MODULES += libashmemd_client
+TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/libkeymaster4.so
 TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/libpuresoftkeymasterdevice.so
 TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/libashmemd_client.so 
 TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/ashmemd_aidl_interface-cpp.so
@@ -141,6 +143,7 @@ TARGET_SYSTEM_PROP := $(DEVICE_PATH)/system.prop
 TW_INCLUDE_CRYPTO := true
 #TW_INCLUDE_FBE := true
 TW_INCLUDE_CRYPTO_FBE := true
+TW_INCLUDE_FBE_METADATA_DECRYPT := true
 
 # AVB - Android Verified Boot / dm-verity
 BOARD_AVB_ENABLE := true
@@ -152,15 +155,15 @@ TW_EXCLUDE_DEFAULT_USB_INIT := true
 TW_EXTRA_LANGUAGES := false
 TW_INCLUDE_NTFS_3G := true
 TW_USE_TOOLBOX := true
-TW_DEVICE_VERSION := -EEA_20210120_V18 by lopestom
+TW_DEVICE_VERSION := -Ulefone Armor 11 5G_AH5_V02 - 20220307_V11 by lopestom
 TW_DEFAULT_DEVICE_NAME := Armor_11_5G
-TW_DEFAULT_LANGUAGE := en
+TW_DEFAULT_LANGUAGE := ru
 TARGET_USES_MKE2FS := true
 
 # Display
 TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
-TW_MAX_BRIGHTNESS := 1047
-TW_DEFAULT_BRIGHTNESS := 560
+TW_MAX_BRIGHTNESS := 255
+TW_DEFAULT_BRIGHTNESS := 100
 TW_SCREEN_BLANK_ON_BOOT := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_USE_MODEL_HARDWARE_ID_FOR_DEVICE_ID := true
@@ -190,11 +193,16 @@ VENDOR_SECURITY_PATCH := 2099-12-31
 
 # Storage
 TW_NO_USB_STORAGE := true
-# TW_INTERNAL_STORAGE_PATH := "/data/media/0"
-# TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
-# TW_EXTERNAL_STORAGE_PATH := "/external_sd"
-# TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
+TW_INTERNAL_STORAGE_PATH := "/data/media/0"
+TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
+TW_EXTERNAL_STORAGE_PATH := "/external_sd"
+TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
 TW_MTP_DEVICE := /dev/mtp_usb
-# TW_DEFAULT_EXTERNAL_STORAGE := true
+TW_DEFAULT_EXTERNAL_STORAGE := true
 TW_HAS_MTP := true
-# TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/class/android_usb/android0/f_mass_storage/lun/file
+
+TW_CRYPTO_FS_TYPE := "ext4"
+TW_CRYPTO_REAL_BLKDEV := "/dev/block/by-name/userdata"
+TW_CRYPTO_MNT_POINT := "/data"
+#TW_CRYPTO_FS_OPTIONS := "nosuid,nodev,noatime,discard,noauto_da_alloc,data=ordered"
+TW_CRYPTO_FS_OPTIONS := "rw,seclabel,nosuid,nodev,noatime,noauto_da_alloc,inlinecrypt,resgid=1065,errors=panic,data=ordered"

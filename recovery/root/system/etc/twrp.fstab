@@ -1,12 +1,16 @@
-#fstab file by lopestom for Ulefone Armor_11_5G_AH5_V01 - GQ5001AH5_S1000E_Ulefone_20210809_V06
+#fstab file by lopestom for Ulefone Armor_11_5G_AH5_V02 - GQ5001AH5_S1000E_Ulefone_20220307_V11
 #
 # mount point    fstype  device                             device2                flags
 
 # Dynamic partition
-/system		    ext4	/dev/block/mapper/system      flags=backup=1;display="System ext4"
-/vendor             ext4        /dev/block/mapper/vendor      flags=backup=1;display="Vendor ext4"
-/product            ext4        /dev/block/mapper/product     flags=backup=1;display="Product ext4"
+/system		    ext4	/dev/block/mapper/system      flags=backup=1;display="System ext4";wipeingui
+/vendor             ext4        /dev/block/mapper/vendor      flags=backup=1;display="Vendor ext4";wipeingui
+/product            ext4        /dev/block/mapper/product     flags=backup=1;display="Product ext4";wipeingui
 
+# Images
+/system_image	    emmc  	/dev/block/mapper/system_a            flags=backup=1;flashimg=1;logical;display="System Image"
+/vendor_image	    emmc  	/dev/block/mapper/vendor_a             flags=backup=1;flashimg=1;logical;display="Vendor Image"
+/product_image	    emmc	/dev/block/mapper/product_a             flags=backup=1;flashimg=1;logical;display="Product Image"
 
 # Core Partitions
 #/metadata             ext4    /dev/block/by-name/md_udc         flags=backup=1;display="metadata"
