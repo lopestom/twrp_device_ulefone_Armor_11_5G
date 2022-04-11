@@ -1,16 +1,5 @@
-ro.secure=0
-ro.adb.secure=0
-ro.debuggable=1
-ro.allow.mock.location=1
-persist.sys.usb.config=mtp,adb
-persist.service.adb.enable=1
-persist.service.debuggable=1
+# Default properties
 ro.sf.lcd_density=320
-persist.sys.isUsbOtgEnabled=true
-ro.sys.usb.mtp.whql.enable=0
-ro.sys.usb.storage.type=mtp
-ro.boot.hardware=mt6873
-ro.hardware=mt6873
 ro.vendor.mediatek.platform=MT6873
 ro.hardware.egl=meow
 ro.vendor.mtk_f2fs_enable=1
@@ -21,12 +10,25 @@ ro.hardware.kmsetkey=trustkernel
 ro.hardware.gatekeeper=trustkernel
 ro.hct_trustkernel_tee_support=1
 ro.hct_trustkernel_tee_support=1
-ro.treble.enabled=true
 ro.crypto.volume.filenames_mode=aes-256-cts
+ro.hardware=mt6873
+ro.boot.hardware=mt6873
+#
+persist.sys.isUsbOtgEnabled=true
+ro.sys.usb.mtp.whql.enable=0
+ro.sys.usb.storage.type=mtp
+# Recovery specific properties
+ro.secure=0
+ro.adb.secure=0
+ro.debuggable=1
+ro.allow.mock.location=1
+persist.sys.usb.config=mtp,adb
+persist.service.adb.enable=1
+persist.service.debuggable=1
+ro.treble.enabled=true
 sys.usb.ffs.aio_compat=true
 vendor.gatekeeper.disable_spu=true
 fbe.metadata.wrappedkey=true
 sys.usb.controller=musb-hdrc
 ro.boot.avb_version=1.1
 ro.boot.vbmeta.avb_version=1.1
-
