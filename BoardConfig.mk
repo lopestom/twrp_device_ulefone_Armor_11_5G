@@ -148,7 +148,7 @@ TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/as
 TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
 
 # TWRP Configuration
-TARGET_RECOVERY_INITRC := device/oukitel/WP10/recovery/root/init.recovery.mt6873.rc
+TARGET_RECOVERY_INITRC := $(DEVICE_PATH)/recovery/root/init.recovery.mt6873.rc
 TW_EXCLUDE_DEFAULT_USB_INIT := true
 TW_CUSTOM_CPU_TEMP_PATH := /sys/devices/virtual/thermal/thermal_zone1/temp
 TARGET_RECOVERY_LCD_BACKLIGHT_PATH := \"/sys/class/leds/lcd-backlight/brightness\"
@@ -181,11 +181,11 @@ TW_DEFAULT_EXTERNAL_STORAGE := true
 TW_THEME := portrait_hdpi
 DEVICE_SCREEN_WIDTH := 720
 DEVICE_SCREEN_HEIGHT := 1560
-TW_Y_OFFSET := 80
-TW_H_OFFSET := -80
+TW_Y_OFFSET := 60
+TW_H_OFFSET := -60
 
 # Debug
 TWRP_INCLUDE_LOGCAT := true
 TARGET_USES_LOGD := true
 
-TW_DEVICE_VERSION := -Ulefone Armor 11 5G_AH5_V02 - 20220307_V11 by lopestom
+TW_DEVICE_VERSION := Ulefone Armor 11 5G_AH5_V02 - 20220307_V11 by lopestom
