@@ -10,12 +10,12 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
 $(call inherit-product, device/ulefone/Armor_11_5G/device.mk)
 
 # Inherit some common twrp stuff.
-$(call inherit-product, vendor/twrp/config/common.mk)
+$(call inherit-product, vendor/omni/config/common.mk)
 
 
 # Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := Armor_11_5G
-PRODUCT_NAME := twrp_Armor_11_5G
+PRODUCT_NAME := omni_Armor_11_5G
 PRODUCT_BRAND := Ulefone
 PRODUCT_MODEL := Armor 11 5G
 PRODUCT_MANUFACTURER := Ulefone
