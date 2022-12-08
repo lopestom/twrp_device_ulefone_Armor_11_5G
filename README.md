@@ -5,7 +5,7 @@ Status: ??
 
 recovery-Armor_11_5G-A10-tttttt-tttt.img => Working??
 ------------------------------------
-Credit: tester for [Harlock1978 - xda](https://)
+Credit: tester for [Harlock1978 - xda](https://github.com/Harlock1978)
 
 --------------------------------
 
