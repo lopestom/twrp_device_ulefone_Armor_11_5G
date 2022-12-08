@@ -61,7 +61,7 @@ jobs:
          run: |
               PATH=~/bin:$PATH
               cd twrp
-              export ALLOW_MISSING_DEPENDENCIES=true && source build/envsetup.sh &&lunch twrp_Armor_11_5G-eng && mka $TARGET -j5
+              export ALLOW_MISSING_DEPENDENCIES=true && source build/envsetup.sh &&lunch omni_Armor_11_5G-eng && mka $TARGET -j5
               cp  out/target/product/Armor_11_5G/recovery.img    out/target/product/Armor_11_5G/recovery-Armor_11_5G-A10-$(date +"%Y%m%d-%H%M").img  
              
        - name: Release recovery image
@@ -69,7 +69,7 @@ jobs:
          env:
           GITHUB_TOKEN: ${{ secrets.TEST }}
          with:
-          tag_name: Armor_11_5G-V11
+          tag_name: Armor_11_5G-Harlock1978_A10
           name: TWRP35x_10
           files: | 
             twrp/out/target/product/Armor_11_5G/recovery*.img
