@@ -62,7 +62,7 @@ jobs:
               PATH=~/bin:$PATH
               cd twrp
               export ALLOW_MISSING_DEPENDENCIES=true && source build/envsetup.sh &&lunch twrp_Armor_11_5G-eng && mka $TARGET -j5
-              cp  out/target/product/Armor_11_5G/recovery.img    out/target/product/Armor_11_5G/recovery-Armor_11_5G-A11-$(date +"%Y%m%d-%H%M").img  
+              cp  out/target/product/Armor_11_5G/recovery.img    out/target/product/Armor_11_5G/recovery-Armor_11_5G-3.6_A10-$(date).img  
              
        - name: Release recovery image
          uses: softprops/action-gh-release@v1
@@ -70,6 +70,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.TEST }}
          with:
           tag_name: Armor_11_5G-V11
-          name: TWRP36x_11
+          name: TWRP36x_11-TEST
           files: | 
             twrp/out/target/product/Armor_11_5G/recovery*.img
