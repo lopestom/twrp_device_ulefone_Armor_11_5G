@@ -8,10 +8,17 @@ on init
     export LD_LIBRARY_PATH /system/lib64:/vendor/lib64:/vendor/lib64/hw:/system/lib64/hw
     export LD_LIBRARY_PATH /system/bin:/vendor/bin
 
-    mkdir /mnt/vendor/persist 0700 root root
+    mkdir /mnt/vendor/persist
     mount ext4 /dev/block/by-name/persist /mnt/vendor/persist rw
 
+   # Create a more standard /dev/block layout for our scripts
+    symlink /dev/block/platform/bootdevice /dev/block/bootdevice
+    export ANDROID_ROOT /system_root
+    # Somehow AOSP build system hasn't provided a symlink here
+    symlink /system_root/system /system
+
 on fs
+on property:ro.crypto.state=encrypted && property:ro.crypto.type=file && property:ro.crypto.type=block
     install_keyring
     setprop crypto.ready 1
     start hwservicemanager
@@ -43,6 +50,38 @@ service keystore_auth /system/bin/keystore_auth
     disabled
     seclabel u:r:recovery:s0
 
+on property:vendor.sys.listener.registered=true
+    start gatekeeper-1-0
+
+on property:hwservicemanager.ready=true
+    start vendor.keymaster-4-0-trustkernel
+    start vendor.gatekeeper-1-0
+    #start keymaster_attestation-1-1
+    
+on property:ro.crypto.state=unsupported
+    stop teed
+    stop vendor.keymaster-4-0-trustkernel
+    stop vendor.gatekeeper-1-0
+    #stop keymaster_attestation-1-1
+    stop servicemanager
+    stop hwservicemanager
+
+on property:ro.crypto.state=unencrypted
+    stop teed
+    stop vendor.keymaster-4-0-trustkernel
+    stop vendor.gatekeeper-1-0
+    #stop keymaster_attestation-1-1
+    stop servicemanager
+    stop hwservicemanager
+
+on property:twrp.decrypt.done=true  && 
+    stop teed
+    stop vendor.keymaster-4-0-trustkernel
+    stop vendor.gatekeeper-1-0
+    #stop keymaster_attestation-1-1
+    stop servicemanager
+    stop hwservicemanager
+    
 on init
     setprop sys.usb.configfs 1
     setprop sys.usb.ffs.aio_compat 1
@@ -57,36 +96,17 @@ on post-fs
     # Support A/B feature for EMMC and UFS boot region
     symlink /dev/block/sda /dev/block/mmcblk0boot0
     symlink /dev/block/sdb /dev/block/mmcblk0boot1
-    symlink /dev/block/mmcblk0boot0 /dev/block/by-name/preloader_a
-    symlink /dev/block/mmcblk0boot1 /dev/block/by-name/preloader_b
+    symlink /dev/block/mmcblk0boot0 /dev/block/platform/bootdevice/by-name/preloader_a
+    symlink /dev/block/mmcblk0boot1 /dev/block/platform/bootdevice/by-name/preloader_b
 
-       # Support A/B feature for combo emmc and ufs OTA update
-    symlink /dev/block/by-name/preloader_a /dev/block/by-name/preloader_emmc_a
-    symlink /dev/block/by-name/preloader_b /dev/block/by-name/preloader_emmc_b
-    symlink /dev/block/by-name/preloader_a /dev/block/by-name/preloader_ufs_a
-    symlink /dev/block/by-name/preloader_b /dev/block/by-name/preloader_ufs_b
+    # Support A/B feature for combo emmc and ufs OTA update
+    symlink /dev/block/platform/bootdevice/by-name/preloader_a /dev/block/platform/bootdevice/by-name/preloader_emmc_a
+    symlink /dev/block/platform/bootdevice/by-name/preloader_b /dev/block/platform/bootdevice/by-name/preloader_emmc_b
+    symlink /dev/block/platform/bootdevice/by-name/preloader_a /dev/block/platform/bootdevice/by-name/preloader_ufs_a
+    symlink /dev/block/platform/bootdevice/by-name/preloader_b /dev/block/platform/bootdevice/by-name/preloader_ufs_b
 
-   
-on property:hwservicemanager.ready=true
-    start teed
-    start vendor.keymaster-4-0-trustkernel
-    start vendor.gatekeeper-1-0
-    #start keymaster_attestation-1-1
-    
-on property:ro.crypto.state=unsupported
-    stop teed
-    stop vendor.keymaster-4-0-trustkernel
-    stop vendor.gatekeeper-1-0
-    #stop keymaster_attestation-1-1
-
-on property:ro.crypto.state=unencrypted
-    stop teed
-    stop vendor.keymaster-4-0-trustkernel
-    stop vendor.gatekeeper-1-0
-    #stop keymaster_attestation-1-1
-
-on property:twrp.decrypt.done=true && property:twrp.all.users.decrypted=true
-    stop teed
-    stop vendor.keymaster-4-0-trustkernel
-    stop vendor.gatekeeper-1-0
-    #stop keymaster_attestation-1-1
+    # Support A/B feature for combo emmc and ufs OTA update
+    symlink /dev/block/platform/bootdevice/by-name/preloader_a /dev/block/by-name/preloader_emmc_a
+    symlink /dev/block/platform/bootdevice/by-name/preloader_b /dev/block/by-name/preloader_emmc_b
+    symlink /dev/block/platform/bootdevice/by-name/preloader_a /dev/block/by-name/preloader_ufs_a
+    symlink /dev/block/platform/bootdevice/by-name/preloader_b /dev/block/by-name/preloader_ufs_b
