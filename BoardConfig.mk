@@ -35,6 +35,7 @@ TARGET_2ND_ARCH_VARIANT := armv8-2a
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := cortex-a55
+
 TARGET_BOARD_SUFFIX := _64
 TARGET_USES_64_BIT_BINDER := true
 TARGET_SUPPORTS_64_BIT_APPS := true
@@ -80,7 +81,7 @@ BOARD_ULEFONE_DYNAMIC_PARTITIONS_PARTITION_LIST := product vendor system
 
 
 # System as root
-#BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
+BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
 BOARD_SUPPRESS_SECURE_ERASE := true
 
 # Kernel
@@ -203,7 +204,6 @@ TW_INCLUDE_FUSE_EXFAT := true                 # Include Fuse-ExFAT Filesystem Su
 TWRP_INCLUDE_LOGCAT := true                   # Include LogCat Binary
 TARGET_USES_LOGD := true
 TW_INCLUDE_FB2PNG := true                     # Include Screenshot Support
-TW_USE_MODEL_HARDWARE_ID_FOR_DEVICE_ID := true
 
 # Excludes
 TW_EXCLUDE_TWRPAPP := true
