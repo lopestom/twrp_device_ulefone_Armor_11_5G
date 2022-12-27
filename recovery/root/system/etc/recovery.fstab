@@ -6,44 +6,20 @@
 # 1 "<built-in>" 2
 # 1 "vendor/mediatek/proprietary/hardware/fstab/mt6873/fstab.in.mt6873" 2
 # 125 "vendor/mediatek/proprietary/hardware/fstab/mt6873/fstab.in.mt6873"
-#system /system ext4 ro wait,,avb=vbmeta_system,logical,first_stage_mount,avb_keys=/avb/q-gsi.avbpubkey:/avb/r-gsi.avbpubkey:/avb/s-gsi.avbpubkey
+system /system ext4 ro wait,,avb=vbmeta_system,logical,first_stage_mount,avb_keys=/avb/q-gsi.avbpubkey:/avb/r-gsi.avbpubkey:/avb/s-gsi.avbpubkey
 
-#vendor /vendor ext4 ro wait,,avb,logical,first_stage_mount
-
-
-#product /product ext4 ro wait,,avb,logical,first_stage_mount
+vendor /vendor ext4 ro wait,,avb,logical,first_stage_mount
 
 
-
-
-
-#/dev/block/by-name/metadata /metadata ext4 noatime,nosuid,nodev,discard wait,formattable,first_stage_mount
-
-#/dev/block/by-name/userdata /data ext4 noatime,nosuid,nodev,noauto_da_alloc,nodelalloc,nobarrier,data=writeback,errors=panic wait,check,formattable,quota,resize,reservedsize=128m,checkpoint=block,fileencryption=aes-256-xts:aes-256-cts:v1
-#/dev/block/by-name/userdata /data ext4 noatime,nosuid,nodev,noauto_da_alloc,errors=panic wait,check,formattable,quota,resize,reservedsize=128m,checkpoint=block,fileencryption=aes-256-xts
-#/dev/block/bootdevice/by-name/userdata /data ext4 noatime,nosuid,nodev,discard,reserve_root=32768,resgid=1065,fsync_mode=nobarrier,latemount,wait,check,fileencryption=ice,keydirectory=/metadata/vold/metadata_encryption,quota,formattable,sysfs_path=/sys/devices/platform/soc/1d84000.ufshc,reservedsize=128M,checkpoint=block
-#/dev/block/by-name/userdata /data ext4 noatime,nosuid,nodev,noauto_da_alloc,nodelalloc,nobarrier,data=writeback,errors=panic wait,check,formattable,quota,resize,reservedsize=128m,checkpoint=block,fileencryption=aes-256-xts
-
-
-#Mod copied by ADeadTrousers
-
-system /system ext4 ro wait,logical,first_stage_mount
-
-vendor /vendor ext4 ro wait,logical,first_stage_mount
-
-
-product /product ext4 ro wait,logical,first_stage_mount
+product /product ext4 ro wait,,avb,logical,first_stage_mount
 
 
 
 
 
-/dev/block/platform/bootdevice/by-name/md_udc /metadata ext4 noatime,nosuid,nodev,discard wait,formattable,first_stage_mount
+/dev/block/by-name/metadata /metadata ext4 noatime,nosuid,nodev,discard wait,formattable,first_stage_mount
 
-/dev/block/platform/bootdevice/by-name/userdata /data ext4 noatime,nosuid,nodev,noauto_da_alloc,errors=panic wait,check,formattable,quota,resize,reservedsize=128m,checkpoint=block,fileencryption=aes-256-xts
-
-
-#Original fstab again
+/dev/block/by-name/userdata /data ext4 noatime,nosuid,nodev,noauto_da_alloc,nodelalloc,nobarrier,data=writeback,errors=panic wait,check,formattable,quota,resize,reservedsize=128m,checkpoint=block,fileencryption=aes-256-xts
 
 /dev/block/by-name/cache /cache ext4 noatime,nosuid,nodev,noauto_da_alloc,discard wait,check,formattable
 
@@ -120,6 +96,10 @@ product /product ext4 ro wait,logical,first_stage_mount
 
 
 
+
+
+
+
 /dev/block/by-name/pi_img /pi_img emmc defaults defaults
 /dev/block/by-name/boot_para /boot_para emmc defaults defaults
 
@@ -131,12 +111,3 @@ product /product ext4 ro wait,logical,first_stage_mount
 
 
 /dev/block/by-name/vbmeta /vbmeta emmc defaults defaults
-
-
-# Mount point retrieved through adb shell
-
-/data/media /mnt/runtime/default/emulated sdcardfs rw,nosuid,nodev,noexec,noatime,fsuid=1023,fsgid=1023,gid=1015,multiuser,mask=6,derive_gid,default_normal 0 0
-/data/media /mnt/runtime/read/emulated sdcardfs rw,nosuid,nodev,noexec,noatime,fsuid=1023,fsgid=1023,gid=9997,multiuser,mask=23,derive_gid,default_normal 0 0
-/data/media /mnt/runtime/write/emulated sdcardfs rw,nosuid,nodev,noexec,noatime,fsuid=1023,fsgid=1023,gid=9997,multiuser,mask=7,derive_gid,default_normal 0 0
-/data/media /mnt/runtime/full/emulated sdcardfs rw,nosuid,nodev,noexec,noatime,fsuid=1023,fsgid=1023,gid=9997,multiuser,mask=7,derive_gid,default_normal 0 0
-/data/media /storage/emulated sdcardfs rw,nosuid,nodev,noexec,noatime,fsuid=1023,fsgid=1023,gid=9997,multiuser,mask=7,derive_gid,default_normal 0 0
