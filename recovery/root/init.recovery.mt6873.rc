@@ -21,9 +21,11 @@ on fs
 on property:ro.crypto.state=encrypted && property:ro.crypto.type=file && property:ro.crypto.type=block
     install_keyring
     setprop crypto.ready 1
+    setprop ro.crypto.state encrypted
+    setprop twrp.apex.loaded true
     start hwservicemanager
     start servicemanager
-        
+
 service hwservicemanager /system/bin/hwservicemanager
     user root
     group root readproc
