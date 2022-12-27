@@ -1,4 +1,6 @@
 # Default properties
+ro.boot.dynamic_partitions=true
+ro.board.platform=mt6873
 ro.sf.lcd_density=320
 ro.vendor.mediatek.platform=MT6873
 ro.hardware.egl=meow
